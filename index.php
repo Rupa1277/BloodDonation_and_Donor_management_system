@@ -1,7 +1,3 @@
-<?php
-include("config/database.php");
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +8,11 @@ include("config/database.php");
 
 <h1>Blood Bank & Donor Management System</h1>
 
-<p>Website is working!</p>
+<a href="register.php">Register as Donor</a> |
+<a href="search.php">Search Donor</a> |
+<a href="request.php">Request Blood</a>
+
+<p>Welcome to the Blood Bank System.</p>
 
 </body>
 </html>
