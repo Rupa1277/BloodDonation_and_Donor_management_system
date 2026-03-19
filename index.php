@@ -1,18 +1,33 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Blood Bank System</title>
-</head>
+<?php include("includes/header.php"); ?>
+<?php include("includes/navbar.php"); ?>
 
-<body>
+<div class="hero">
+    <h1>Donate Blood, Save Lives</h1>
+    <p>Find blood donors quickly during emergencies</p>
 
-<h1>Blood Bank & Donor Management System</h1>
+    <div class="hero-buttons">
+        <a class="btn" href="register.php">Register</a>
+        <a class="btn" href="search.php">Search Donor</a>
+    </div>
+</div>
 
-<a href="register.php">Register as Donor</a> |
-<a href="search.php">Search Donor</a> |
-<a href="request.php">Request Blood</a>
+<div class="card-container">
 
-<p>Welcome to the Blood Bank System.</p>
+    <div class="card">
+        <h3>Donate Blood</h3>
+        <p>Help save lives by donating blood.</p>
+    </div>
 
-</body>
-</html>
+    <div class="card">
+        <h3>Find Donor</h3>
+        <p>Search for donors by blood group.</p>
+    </div>
+
+    <div class="card">
+        <h3>Request Blood</h3>
+        <p>Request blood in emergencies.</p>
+    </div>
+
+</div>
+
+<?php include("includes/footer.php"); ?>

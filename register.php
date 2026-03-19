@@ -1,42 +1,38 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Register Donor</title>
-</head>
+<?php include("config/database.php"); ?>
+<?php include("includes/header.php"); ?>
+<?php include("includes/navbar.php"); ?>
 
-<body>
+<?php
+if(isset($_GET['success'])){
+echo "<p style='color:green;text-align:center;'>Donor Registered Successfully!</p>";
+}
+if(isset($_GET['error'])){
+echo "<p style='color:red;text-align:center;'>Please fill all required fields!</p>";
+}
+?>
 
-<h2>Donor Registration</h2>
+<div class="form-container">
+
+<h2>Register as Donor</h2>
 
 <form action="donor/register_donor.php" method="POST">
-
-Name:<br>
-<input type="text" name="name"><br>
-
-Age:<br>
-<input type="number" name="age"><br>
-
-Blood Group:<br>
+<input type="text" name="name" placeholder="Name" required>
+<input type="number" name="age" placeholder="Age" required>
 <select name="blood_group">
+<option value="">Select Blood Group</option>
 <option>A+</option>
-<option>A-</option>
 <option>B+</option>
-<option>B-</option>
 <option>O+</option>
-<option>O-</option>
 <option>AB+</option>
-<option>AB-</option>
-</select><br>
+</select>
 
-Phone:<br>
-<input type="text" name="phone"><br>
-
-Location:<br>
-<input type="text" name="location"><br><br>
-
-<input type="submit" value="Register">
-
+<input type="text" name="phone" placeholder="Phone">
+<input type="text" name="location" placeholder="Location">
+<button class="btn">Register</button>
 </form>
 
+</div>
+
+<?php include("includes/footer.php"); ?>
 </body>
 </html>

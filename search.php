@@ -1,43 +1,60 @@
-<?php
-include("config/database.php");
-?>
+<?php include("config/database.php"); ?>
+<?php include("includes/header.php"); ?>
+<?php include("includes/navbar.php"); ?>
+
+<div class="hero">
+<h1>Find Blood Donors</h1>
+<p>Search donors by blood group instantly</p>
+</div>
+
+<div class="form-container">
 
 <h2>Search Donor</h2>
 
 <form method="GET">
-
-Blood Group:
-<select name="blood_group">
+<select name="bg">
+<option value="">Select Blood Group</option>
 <option>A+</option>
 <option>B+</option>
 <option>O+</option>
 <option>AB+</option>
 </select>
-
-<input type="submit" value="Search">
+<button class="btn">Search</button>
 
 </form>
-
-<hr>
+</div>
 
 <?php
 
-if(isset($_GET['blood_group'])){
+if(isset($_GET['bg']) && $_GET['bg'] != ""){
 
-$bg = $_GET['blood_group'];
+$bg = $_GET['bg'];
 
-$sql = "SELECT * FROM donors WHERE blood_group='$bg'";
-$result = mysqli_query($conn,$sql);
+$result = mysqli_query($conn,"SELECT * FROM donors WHERE blood_group='$bg'");
+
+if(mysqli_num_rows($result) > 0){
+
+echo "<table>";
+echo "<tr><th>Name</th><th>Blood Group</th><th>Phone</th><th>Location</th></tr>";
 
 while($row = mysqli_fetch_assoc($result)){
-
-echo "Name: ".$row['name']."<br>";
-echo "Phone: ".$row['phone']."<br>";
-echo "Location: ".$row['location']."<br>";
-echo "<hr>";
-
+echo "<tr>
+<td>{$row['name']}</td>
+<td>{$row['blood_group']}</td>
+<td>{$row['phone']}</td>
+<td>{$row['location']}</td>
+</tr>";
 }
 
+echo "</table>";
+
+}else{
+echo "<p style='text-align:center;'>No donors found</p>";
 }
 
+}else{
+echo "<p style='text-align:center; margin-top:20px;'>Please select a blood group to search donors</p>";
+}
 ?>
+
+<?php include("includes/footer.php"); ?>

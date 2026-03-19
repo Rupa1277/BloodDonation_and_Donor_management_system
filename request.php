@@ -1,29 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h2>Request Blood</h2>
+<?php include("includes/header.php"); ?>
+<?php include("includes/navbar.php"); ?>
 
-<form action="request_handler/submit_request.php" method="POST">
+<div class="container">
+<?php if(isset($_GET['success'])) { ?>
+    <p class="success-msg">Request submitted successfully!</p>
+<?php } ?>
+    <div class="form-card">
+        <h2>Request Blood</h2>
+        <p class="subtitle">Fill the details to request blood</p>
 
-Patient Name:<br>
-<input type="text" name="patient_name"><br>
+        <form action="request/submit_request.php" method="POST">
+            <label>Patient Name</label>
+            <input type="text" name="patient_name" placeholder="Enter patient name" required>
 
-Blood Group:<br>
-<input type="text" name="blood_group"><br>
+            <label>Blood Group</label>
+            <select name="blood_group" required>
+                <option value="">Select Blood Group</option>
+                <option>A+</option>
+                <option>A-</option>
+                <option>B+</option>
+                <option>B-</option>
+                <option>O+</option>
+                <option>O-</option>
+                <option>AB+</option>
+                <option>AB-</option>
+            </select>
 
-Hospital:<br>
-<input type="text" name="hospital"><br>
-
-Contact Number:<br>
-<input type="text" name="contact_number"><br><br>
-
-<input type="submit" value="Submit Request">
-
-</form>
-</body>
-</html>
+            <label>Hospital</label>
+            <input type="text" name="hospital" placeholder="Enter hospital name" required>
+            <label>Contact Number</label>
+            <input type="text" name="contact_number" placeholder="Enter contact number" required pattern="[0-9]{10}">
+            <button type="submit" class="btn">Submit Request</button>
+        </form>
+    </div>
+</div>
+<?php include("includes/footer.php"); ?>
