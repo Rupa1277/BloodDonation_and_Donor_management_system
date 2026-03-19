@@ -10,8 +10,10 @@ include("../config/database.php");
 
 $id = intval($_GET['id']);
 
-mysqli_query($conn, "DELETE FROM donors WHERE id=$id");
+// Update status
+mysqli_query($conn, "UPDATE requests SET status='Approved' WHERE id=$id");
 
-header("Location: view_donors.php");
+// Redirect back
+header("Location: view_requests.php");
 exit();
 ?>

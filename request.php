@@ -5,7 +5,7 @@
 <?php if(isset($_GET['success'])) { ?>
     <p class="success-msg">Request submitted successfully!</p>
 <?php } ?>
-    <div class="form-card">
+    <div class="form-container">
         <h2>Request Blood</h2>
         <p class="subtitle">Fill the details to request blood</p>
 
