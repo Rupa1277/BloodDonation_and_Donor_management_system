@@ -1,11 +1,5 @@
+<?php include("auth.php"); ?>
 <?php
-session_start();
-
-// Protect page
-if(!isset($_SESSION['admin'])) {
-    header("Location: login.php");
-    exit();
-}
 
 include("../config/database.php");
 include("../includes/header.php");

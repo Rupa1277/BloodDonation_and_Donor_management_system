@@ -4,21 +4,29 @@ include("../config/database.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $patient = $_POST['patient_name'];
-    $blood = $_POST['blood_group'];
-    $hospital = $_POST['hospital'];
-    $contact = $_POST['contact_number'];
+    $patient = isset($_POST['patient_name']) ? trim($_POST['patient_name']) : '';
+    $blood = isset($_POST['blood_group']) ? $_POST['blood_group'] : '';
+    $hospital = isset($_POST['hospital']) ? trim($_POST['hospital']) : '';
+    $contact = isset($_POST['contact_number']) ? trim($_POST['contact_number']) : '';
+
+    // Security
+    $patient = htmlspecialchars($patient);
+    $hospital = htmlspecialchars($hospital);
+    $contact = htmlspecialchars($contact);
+    $valid_groups = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
 
     // Validation
     if(empty($patient) || empty($blood) || empty($hospital) || empty($contact)) {
-        die("All fields are required");
+        header("Location: ../request.php?error=1");
+        exit();
     }
 
     if(!preg_match("/^[0-9]{10}$/", $contact)) {
-        die("Invalid contact number");
+        header("Location: ../request.php?error=2");
+        exit();
     }
 
-    // ✅ PREPARED STATEMENT (PUT HERE)
+    // Prepared statement
     $stmt = $conn->prepare("INSERT INTO requests (patient_name, blood_group, hospital, contact_number) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("ssss", $patient, $blood, $hospital, $contact);
 
@@ -28,5 +36,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo "Error: " . $stmt->error;
     }
+
+    $stmt->close();
+    $conn->close();
 }
 ?>
