@@ -40,7 +40,7 @@ if(!empty($_GET['blood_group']) && !empty($_GET['city'])){
     echo "<div class='container'>";
     echo "<h2 style='text-align:center;'>Matching Donors</h2>";
 
-    if(mysqli_num_rows($result) > 0){
+    if($result->num_rows > 0){
 
         echo "<table>
                 <tr>

@@ -25,8 +25,15 @@
     ?>
 
     <form action="request/submit_request.php" method="POST">
-         <label>Patient Name</label>
+        <label>Patient Name</label>
         <input type="text" name="patient_name" placeholder="Patient Name" required>
+
+        <label>Request Type</label>
+        <select name="patient_type" required>
+            <option value="">Select</option>
+            <option value="Patient">Patient</option>
+            <option value="Hospital">Hospital</option>
+        </select>
 
         <label>Blood Group</label>
             <select name="blood_group" required>
@@ -43,8 +50,9 @@
         </select>
 
         <label>Hospital</label>
-        <input type="text" name="hospital" placeholder="Enter hospital name" value="<?php echo isset($_GET['city']) ? htmlspecialchars($_GET['city']) : ''; ?>" required>
-
+        <input type="text" name="hospital" placeholder="Enter hospital name" required>
+        <input type="text" name="city" placeholder="City" 
+value="<?php echo isset($_GET['city']) ? htmlspecialchars($_GET['city']) : ''; ?>" required>
         <label>Contact Number</label>
         <input type="text" name="contact_number" placeholder="Contact Number" required pattern="[0-9]{10}">
 

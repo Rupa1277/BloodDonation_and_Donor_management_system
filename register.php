@@ -28,6 +28,8 @@ echo "<p style='color:red;text-align:center;'>Please fill all required fields!</
 
 <input type="text" name="phone" placeholder="Phone">
 <input type="text" name="location" placeholder="Location">
+<label>Last Donation Date</label>
+<input type="date" name="last_donation">
 <button class="btn">Register</button>
 </form>
 

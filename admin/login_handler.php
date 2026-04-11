@@ -1,14 +1,31 @@
 <?php
 session_start();
+include("../config/database.php");
 
-$username = $_POST['username'];
-$password = $_POST['password'];
+$username = trim($_POST['username']);
+$password = trim($_POST['password']);
 
-if($username == "admin" && $password == "admin123"){
-    $_SESSION['admin_logged_in'] = true;
-    header("Location: dashboard.php");
-} else {
-    header("Location: login.php?error=1");
+// Get admin by username
+$stmt = $conn->prepare("SELECT * FROM admin WHERE username=?");
+$stmt->bind_param("s", $username);
+$stmt->execute();
+
+$result = $stmt->get_result();
+
+if($result->num_rows === 1){
+
+    $row = $result->fetch_assoc();
+
+    // Verify hashed password
+    if(password_verify($password, $row['password'])){
+        $_SESSION['admin'] = $row['username'];
+
+        header("Location: dashboard.php");
+        exit();
+    }
 }
+
+// If failed
+header("Location: login.php?error=1");
 exit();
 ?>
